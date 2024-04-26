@@ -1,0 +1,983 @@
+////(widgets)////
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter UI Demo',
+      home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Flutter UI Demo'), // AppBar Widget
+        backgroundColor: Colors.blue, // Customizing AppBar color
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Hello, Flutter!', // Text Widget
+              style: TextStyle(fontSize: 24),
+            ),
+            SizedBox(height: 20), // Adding spacing between widgets
+            ElevatedButton(
+              onPressed: () {
+                // Button Pressed
+              },
+              child: Text('Click Me'), // ElevatedButton Widget
+            ),
+            SizedBox(height: 20), // Adding spacing between widgets
+            Container(
+              width: 200,
+              height: 200,
+              color: Colors.blue, // Container Widget
+              child: Center(
+                child: Text(
+                  'Container', // Text Widget inside Container
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+            ),
+            SizedBox(height: 20), // Adding spacing between widgets
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Row 1:'), // Text Widget inside Row
+                Text(' City '), // Text Widget inside Row
+                Text(' United '), // Text Widget inside Row
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+--------------------------------------------------------------------------------------------------
+/////(grid view)/////
+import 'package:flutter/material.dart';
+void main() {
+runApp(const MyApp());
+}
+class MyApp extends StatelessWidget {
+const MyApp({Key? key}) : super(key: key);
+@override
+Widget build(BuildContext context) {
+return MaterialApp(
+title: 'Flutter Demo',
+theme: ThemeData(
+primarySwatch: Colors.green,
+),
+home: const MyHomePage(title: 'Flutter ListView Demo'),
+);
+}
+}
+class MyHomePage extends StatefulWidget {
+const MyHomePage({Key? key, required this.title}) : super(key: key);
+final String title;
+@override
+State<MyHomePage> createState() => _MyHomePageState();
+}
+class _MyHomePageState extends State<MyHomePage> {
+@override
+Widget build(BuildContext context) {
+return MaterialApp(
+home: Scaffold(
+backgroundColor: Colors.black,
+appBar: AppBar(
+  backgroundColor: Colors.cyan[900],
+title: Center(
+child: Text(
+'Flutter GridView Demo',
+style: TextStyle(
+color: Colors.blueAccent,
+fontWeight: FontWeight.bold,
+fontSize: 30.0,
+),
+),
+),
+),
+body: GridView.count(
+crossAxisCount: 5,
+children: List.generate(
+20,
+(index) {
+return Padding(
+padding: const EdgeInsets.all(10),
+child: Container(
+decoration: BoxDecoration(
+image: DecorationImage(
+image: NetworkImage(
+'https://images.unsplash.com/photo-1592743263126-bb241ee76ac7?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhdXRpZnVsJTIwc2NlbmVyeXxlbnwwfHwwfHx8MA%3D%3D'),
+fit: BoxFit.cover,
+),
+),
+),
+);
+},
+))));
+}
+}
+-------------------------------------------------------------------------------------------------
+/////List view/////
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final List players = [
+    "Messi",
+    "Ronaldo",
+    "Mbappe",
+    "Pedri",
+    "Bellingham",
+    "Gavi",
+    "Cubarsi",
+    "Rodrygo"
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("List View layout",
+              style: TextStyle(
+                  color: Color.fromARGB(255, 242, 242, 242),
+                  fontWeight: FontWeight.bold)),
+          centerTitle: true,
+          backgroundColor: Color.fromARGB(207, 1, 1, 1),
+        ),
+        body: ListView.builder(
+            itemCount: 8,
+            itemBuilder: (context, index) {
+              return Center(child: PlayerCard(name: players[index]));
+            }),
+      ),
+    );
+  }
+}
+
+class PlayerCard extends StatelessWidget {
+  final String name;
+
+  PlayerCard({required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+          leading: Icon(
+            Icons.account_circle,
+            size: 60,
+          ),
+          title: Center(
+            child: Text(
+              name,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          )),
+    );
+  }
+}
+------------------------------------------------------------------------------------------------------
+////Layout_widget////
+flutter:
+  assets:
+    - assets/img1.png
+    - assets/img2.png
+    - assets/img3.png
+------
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Layout Demo',
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Flutter Layout Demo'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ChildWidget(
+              imagePath: 'assets/img1.png',
+              text: 'Flutter',
+            ),
+            SizedBox(height: 20),
+            ChildWidget(
+              imagePath: 'assets/img2.png',
+              text: 'Dart',
+            ),
+            SizedBox(height: 20),
+            ChildWidget(
+              imagePath: 'assets/img3.png',
+              text: 'Material',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ChildWidget extends StatelessWidget {
+  final String imagePath;
+  final String text;
+
+  const ChildWidget({
+    Key? key,
+    required this.imagePath,
+    required this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CircleAvatar(
+          radius: 50,
+          backgroundImage: AssetImage(imagePath),
+        ),
+        SizedBox(height: 10),
+        Text(
+          text,
+          style: TextStyle(fontSize: 18),
+        ),
+      ],
+    );
+  }
+}
+---------------------------------------------------------------------------------------------------
+////forms/////
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const appTitle = "Form Validation Demo";
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: appTitle,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(appTitle),
+        ),
+        body: const MyCustomForm(),
+      ),
+    );
+  }
+}
+
+class MyCustomForm extends StatefulWidget {
+  const MyCustomForm({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return MyCustomFormState();
+  }
+}
+
+class MyCustomFormState extends State<MyCustomForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(
+              icon: Icon(Icons.person),
+              hintText: 'Enter Your Name',
+              labelText: 'Name',
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              icon: Icon(Icons.phone),
+              hintText: 'Enter Your Phone No.',
+              labelText: 'Phone No.',
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty || value.length != 10) {
+                return 'Please enter a valid phone no.';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              icon: Icon(Icons.calendar_today),
+              hintText: 'Enter Your DOB',
+              labelText: 'DOB',
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your dob';
+              }
+              return null;
+            },
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Processing Data')),
+                );
+              }
+            },
+            child: const Text('Submit'),
+          )
+        ],
+      ),
+    );
+  }
+}
+--------------------------------------------------------------------------------------------------------
+/////side nav/////
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyStatefulWidget(),
+      theme: ThemeData(
+        primaryColor: Colors.blue, // Customize primary color
+      // Customize accent color
+      ),
+    );
+  }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  @override
+  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  String _appBarTitle = 'Home';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_appBarTitle),
+      ),
+      drawer: Drawer(
+        elevation: 20.0,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Text("SIES", style: TextStyle(color: Theme.of(context).primaryColor)),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "SIES GST",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                  Text(
+                    "siesgst@gmail.com",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              title: Text("Inbox"),
+              leading: Icon(Icons.mail),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() {
+                  _appBarTitle = 'Inbox';
+                });
+              },
+            ),
+            Divider(
+              height: 0.1,
+            ),
+            ListTile(
+              title: Text("Primary"),
+              leading: Icon(Icons.inbox),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() {
+                  _appBarTitle = 'Primary';
+                });
+              },
+            ),
+            ListTile(
+              title: Text("Social"),
+              leading: Icon(Icons.people),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() {
+                  _appBarTitle = 'Social';
+                });
+              },
+            ),
+            ListTile(
+              title: Text("Promotions"),
+              leading: Icon(Icons.local_offer),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() {
+                  _appBarTitle = 'Promotions';
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+      body: Center(
+        child: Text(
+          'Welcome to $_appBarTitle',
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
+    );
+  }
+}
+-----------------------------------------------------------------------------------------------------------
+////bottom nav////
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyStatefulWidget(),
+      theme: ThemeData(
+        primaryColor: Colors.blue, // Customize primary color
+      ),
+    );
+  }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  @override
+  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  String _appBarTitle = 'MailScanner';
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text('MailScanner Screen'),
+    Text('Primary Screen'),
+    Text('Social Screen'),
+    Text('Promotions Screen'),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      switch (index) {
+        case 0:
+          _appBarTitle = 'MailScanner';
+          break;
+        case 1:
+          _appBarTitle = 'Primary';
+          break;
+        case 2:
+          _appBarTitle = 'Social';
+          break;
+        case 3:
+          _appBarTitle = 'Promotions';
+          break;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_appBarTitle),
+      ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.blue, // Background color of the navigation bar
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.mail),
+            label: 'Inbox',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.inbox),
+            label: 'Primary',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: 'Social',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_offer),
+            label: 'Promotions',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Color.fromARGB(255, 7, 134, 79), // Color of selected item
+        unselectedItemColor:  Colors.blue, // Color of unselected items
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+--------------------------------------------------------------------------------------------------------
+////device previw////
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  device_preview: ^0.6.1
+
+
+import 'package:flutter/material.dart';
+import 'package:device_preview/device_preview.dart';
+
+void main() {
+  runApp(
+    DevicePreview(
+      builder: (context) => const MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+-----------------------------------------------------------------------------------------------------
+/////layout builder/////(responsive UI)
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Responsive Flutter App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Responsive Flutter App'),
+      ),
+      body: Center(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            if (constraints.maxWidth < 600) {
+              // Mobile layout
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildBlock(Colors.green, 'Block 1'),
+                  SizedBox(height: 20),
+                  _buildBlock(Colors.orange, 'Block 2'),
+                ],
+              );
+            } else {
+              // Tablet/Desktop layout
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: _buildBlock(Colors.green, 'Block 1'),
+                  ),
+                  SizedBox(width: 20),
+                  Expanded(
+                    flex: 1,
+                    child: _buildBlock(Colors.orange, 'Block 2'),
+                  ),
+                ],
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBlock(Color color, String text) {
+    return Container(
+      width: 150,
+      height: 150,
+      color: color,
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
+-------------------------------------------------------------------------------------------------
+/////Media querry/////(responsive UI)
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Responsive Flutter App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final isMobile = mediaQuery.size.width < 600;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Responsive Flutter App'),
+      ),
+      body: Center(
+        child: isMobile ? _buildMobileLayout() : _buildTabletDesktopLayout(),
+      ),
+    );
+  }
+
+  Widget _buildMobileLayout() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildBlock(Colors.green, 'Block 1'),
+        SizedBox(height: 20),
+        _buildBlock(Colors.orange, 'Block 2'),
+      ],
+    );
+  }
+
+  Widget _buildTabletDesktopLayout() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 1,
+          child: _buildBlock(Colors.green, 'Block 1'),
+        ),
+        SizedBox(width: 20),
+        Expanded(
+          flex: 1,
+          child: _buildBlock(Colors.orange, 'Block 2'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBlock(Color color, String text) {
+    return Container(
+      width: 150,
+      height: 150,
+      color: color,
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
+------------------------------------------------------------------------------------------------------
+9th ep(pwa creation)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shoe Store</title>
+  <link rel="stylesheet" href="index.css">
+ ////// <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">/////change
+</head>
+<body>
+  <header>
+    <h1>Shoe Store</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Men</a></li>
+      <li><a href="#">Women</a></li>
+      <li><a href="#">Kids</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section id="products">
+      <!-- Product cards will be dynamically added here -->
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2024 Shoe Store</p>
+  </footer>
+  <script src="index.js"></script>
+  <script src="sw.js"></script>
+</body>
+</html>
+---------
+(css)
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin: 0 10px;
+  }
+  
+  nav ul li a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+--------
+(js)
+// Sample product data (replace this with your actual product data)
+const products = [
+    { name: "Men's Sneakers", price: 59.99, image: "men-sneakers.jpg" },
+    { name: "Women's Boots", price: 79.99, image: "women-boots.jpg" },
+    { name: "Kid's Running Shoes", price: 39.99, image: "kids-running-shoes.jpg" }
+  ];
+  
+  // Function to display products
+  function displayProducts() {
+    const productsSection = document.getElementById('products');
+    products.forEach(product => {
+      const productCard = document.createElement('div');
+      productCard.classList.add('product-card');
+      productCard.innerHTML = `
+        <img src="images/${product.image}" alt="${product.name}">
+        <h2>${product.name}</h2>
+        <p>$${product.price}</p>
+        <button>Add to Cart</button>
+      `;
+      productsSection.appendChild(productCard);
+    });
+  }
+  
+  // Call the function to display products when the page loads
+  window.onload = displayProducts;
+    
+--------
+(manifest)
+{
+    "name":"TempConv",
+    "short_name":"TV",
+    "icons":[{"src":"/android-chrome-192x192.png",
+    "sizes":"192x192","type":"image/png"},
+    {"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],
+    "theme_color":"#ffffff",
+    "background_color":"#ffffff",
+    "display":"standalone",
+    "start_url":"/"
+}
+--------
+(sw.js)
+if('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        this.navigator.serviceWorker.register('/sw.js', {scope: "/"}).then(function(registeration) {
+            console.log('service work reg succeess with scope:', registeration.scope);
+
+        }, function(err) {
+            console.error('serviceW reg failed:', err);
+        });
+    })
+}
+--------
+
+
+
+
+
